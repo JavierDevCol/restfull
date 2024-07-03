@@ -16,7 +16,7 @@ public enum TipoDocumento {
 
     static String getTipo(String tipo) {
         for (int i = 0; i < values().length; i++) {
-            if (Objects.equals(values()[i].valor, tipo)) {
+            if (Objects.equals(values()[i].name(), tipo)) {
                 return values()[i].valor;
             }
         }

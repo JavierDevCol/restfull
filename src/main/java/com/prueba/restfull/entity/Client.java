@@ -36,7 +36,7 @@ public class Client {
     private LocalDateTime fechaNacimiento;
 
     public Client(Long documento, String tipoDocumneto, String nombreCompleto, String fechaNacimiento) {
-        this.validarNoNull();
+        this.validarNoNull(documento,tipoDocumneto,nombreCompleto);
         this.validarFechaNacimiento(fechaNacimiento);
         this.validarNombreCompleto(nombreCompleto);
 
@@ -66,14 +66,14 @@ public class Client {
         }
     }
 
-    private void validarNoNull() {
-        if (Objects.isNull(this.documento)) {
+    private void validarNoNull(Long documento, String tipoDocumneto, String nombreCompleto) {
+        if (Objects.isNull(documento)) {
             throw new ExceptionDocumentoNotNull(DOCUMENTO_NO_NULL);
         }
-        if (Objects.isNull(this.tipoDocumento)) {
+        if (Objects.isNull(tipoDocumneto)) {
             throw new ExceptionDocumentoNotNull(TIPO_DOCUMENTO_NO_NULL);
         }
-        if (Objects.isNull(this.nombreCompleto)) {
+        if (Objects.isNull(nombreCompleto)) {
             throw new ExceptionDocumentoNotNull(NOMBRE_NO_NULL);
         }
     }
