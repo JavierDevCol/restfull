@@ -36,7 +36,7 @@ public class ServiceClientImplTest {
     void testFindClienteByDocument_Success() {
         Long documento = 123456789L;
         Client client = new Client(documento, "CEDULA", "Juan Perez", null);
-        ClientModel clientModel = new ClientModel(documento, "DNI", "Juan Pérez", null);
+        ClientModel clientModel = new ClientModel(documento, "CEDULA", "Juan Perez", null);
 
         when(repositoryClient.findByDocumento(documento)).thenReturn(Mono.just(client));
 
