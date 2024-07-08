@@ -24,7 +24,7 @@ public class Client {
     private final static String FECHA_MAYOR_ACTUAL = "La fecha de nacimiento no puede ser mayor a la fecha actual.";
     private final static String NOMBRE_INVALIDO = "Son permitidos caracteres alfabeticos y espacios";
     private final static LocalDate FECHA_MININA_VALIDA = LocalDate.of(1900, 1, 1);
-    private static final String VALID_CHARS_REGEX = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\\\\s]+$";
+    private static final String VALID_CHARS_REGEX = "^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\\s]+$";
 
     @Id
     private Long documento;
