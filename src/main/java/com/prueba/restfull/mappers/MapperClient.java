@@ -4,6 +4,9 @@ import com.prueba.restfull.entity.Client;
 import com.prueba.restfull.model.ClientModel;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Component
 public class MapperClient {
 
@@ -12,7 +15,7 @@ public class MapperClient {
                 clientModel.getDocumento(),
                 clientModel.getTipoDocumneto(),
                 clientModel.getNombreCompleto(),
-                clientModel.getFechaNacimiento());
+                LocalDate.parse(clientModel.getFechaNacimiento(), DateTimeFormatter.ISO_LOCAL_DATE));
     }
 
     public ClientModel toClientModel(Client client) {
@@ -20,7 +23,7 @@ public class MapperClient {
                 client.getDocumento(),
                 client.getTipoDocumento(),
                 client.getNombreCompleto(),
-                client.getFechaNacimiento().toString()
+                client.getFechaNacimiento() != null? client.getFechaNacimiento().toString() : null
         );
     }
 }

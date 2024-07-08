@@ -24,7 +24,7 @@ public class Client {
     private final static String FECHA_MAYOR_ACTUAL = "La fecha de nacimiento no puede ser mayor a la fecha actual.";
     private final static String NOMBRE_INVALIDO = "Son permitidos caracteres alfabeticos y espacios";
     private final static LocalDate FECHA_MININA_VALIDA = LocalDate.of(1900, 1, 1);
-    private static final String VALID_CHARS_REGEX = "^[a-zA-Z\\s]+$";
+    private static final String VALID_CHARS_REGEX = "[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\\\\s]+$";
 
     @Id
     private Long documento;
@@ -33,33 +33,27 @@ public class Client {
 
     private String nombreCompleto;
 
-    private LocalDateTime fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
-    public Client(Long documento, String tipoDocumneto, String nombreCompleto, String fechaNacimiento) {
-        this.validarNoNull(documento,tipoDocumneto,nombreCompleto);
+    public Client(Long documento, String tipoDocumento, String nombreCompleto, LocalDate fechaNacimiento) {
+        this.validarNoNull(documento,tipoDocumento,nombreCompleto);
         this.validarFechaNacimiento(fechaNacimiento);
         this.validarNombreCompleto(nombreCompleto);
 
-        this.tipoDocumento = TipoDocumento.getTipo(tipoDocumneto);
+        this.tipoDocumento = TipoDocumento.getTipo(tipoDocumento);
         this.documento = documento;
         this.nombreCompleto = nombreCompleto;
     }
 
-    private void validarFechaNacimiento(String fechaIso) {
+    private void validarFechaNacimiento(LocalDate fechaIso) {
         if (Objects.nonNull(fechaIso)) {
-            try {
-                this.fechaNacimiento = LocalDateTime.parse(fechaIso, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-            } catch (DateTimeParseException e) {
-                throw new ExceptionDateEmpty(FECHA_NO_FORMAT_ISO_8601);
-            }
-
-            if (this.fechaNacimiento.toLocalDate().isBefore(FECHA_MININA_VALIDA)) {
+            if (fechaIso.isBefore(FECHA_MININA_VALIDA)) {
                 this.fechaNacimiento = null;
                 throw new ExceptionFechaMinima(FECHA_MENOR_1_Enero_1900);
             }
 
             LocalDate fechaActual = LocalDate.now();
-            if (this.fechaNacimiento.toLocalDate().isAfter(fechaActual)) {
+            if (fechaIso.isAfter(fechaActual)) {
                 this.fechaNacimiento = null;
                 throw new ExceptionFechaMaxima(FECHA_MAYOR_ACTUAL);
             }

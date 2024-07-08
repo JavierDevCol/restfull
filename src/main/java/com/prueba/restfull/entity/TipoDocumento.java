@@ -11,7 +11,8 @@ public enum TipoDocumento {
 
     private String valor;
 
-    TipoDocumento(String pasaport) {
+    TipoDocumento(String valor) {
+        this.valor = valor;
     }
 
     static String getTipo(String tipo) {
